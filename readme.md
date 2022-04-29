@@ -9,5 +9,5 @@ Project Website: https://latestproject3.herokuapp.com/dashboard
 [![Development Workflow 3.8](https://github.com/HamidRazavi7/hamidproject3/actions/workflows/dev.yml/badge.svg)](https://github.com/HamidRazavi7/hamidproject3/actions/workflows/dev.yml)
 
 
-![Running Program](screenshots/Dashboard_CSV.png)
-![Running Program](screenshots/Playlist_Database.png)
+![Running Program](Screenshots/Dashboard_CSV.png)
+![Running Program](Screenshots/Playlist_Database.png)
