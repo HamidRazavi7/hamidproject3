@@ -42,7 +42,7 @@ def songs_upload():
         with open(filepath) as file:
             csv_file = csv.DictReader(file)
             for row in csv_file:
-                list_of_songs.append(Song(row['Name'], row['Artist'], row['Genre'], row['Year']))
+                list_of_songs.append(Song(row['Title'], row['Artist'], row['Genre'], row['Year']))
 
         current_user.songs = list_of_songs
         db.session.commit()
@@ -51,7 +51,7 @@ def songs_upload():
         return redirect(url_for('songs.songs_browse'))
 
     try:
-        print('within try')
+
         return render_template('upload.html', form=form)
     except TemplateNotFound:
         abort(404)
