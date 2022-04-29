@@ -7,22 +7,32 @@ from app.db import db
 from flask_login import UserMixin
 from sqlalchemy_serializer import SerializerMixin
 
-class Song(db.Model,SerializerMixin):
+song_user = db.Table('song_user', db.Model.metadata,
+                     db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+                     db.Column('song_id', db.Integer, db.ForeignKey('songs.id'))
+                     )
+
+
+class Song(db.Model, SerializerMixin):
     __tablename__ = 'songs'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(300), nullable=True, unique=False)
     artist = db.Column(db.String(300), nullable=True, unique=False)
+    year = db.Column(db.Integer, nullable=False, unique=False)
+    genre = db.Column(db.String(300), nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = relationship("User", back_populates="songs", uselist=False)
 
-    def __init__(self, title, artist):
+    def __init__(self, title, artist, genre, year):
         self.title = title
         self.artist = artist
+        self.genre = genre
+        self.year = year
+
 
 class Location(db.Model, SerializerMixin):
     __tablename__ = 'locations'
     serialize_only = ('title', 'longitude', 'latitude')
-
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(300), nullable=True, unique=False)
@@ -88,5 +98,3 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.email
-
-
