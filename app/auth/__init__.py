@@ -7,11 +7,15 @@ from app.auth.forms import login_form, register_form, profile_form, security_for
 from app.db import db
 from app.db.models import User
 
+import logging
+
+
 auth = Blueprint('auth', __name__, template_folder='templates')
 
 
 @auth.route('/register', methods=['POST', 'GET'])
 def register():
+    log = logging.getLogger("registration")
     if current_user.is_authenticated:
         return redirect(url_for('auth.dashboard'))
     form = register_form()
@@ -26,6 +30,7 @@ def register():
                 db.session.add(user)
                 db.session.commit()
             flash('Congratulations, you are now a registered user!', "success")
+            log.info('User {} has registered'.format(user))
             return redirect(url_for('auth.login'), 302)
         else:
             flash('Already Registered')
@@ -35,6 +40,7 @@ def register():
 @auth.route('/login', methods=['POST', 'GET'])
 def login():
     form = login_form()
+    log = logging.getLogger('login')
     if current_user.is_authenticated:
         return redirect(url_for('auth.dashboard'))
     if form.validate_on_submit():
@@ -48,6 +54,7 @@ def login():
             db.session.commit()
             login_user(user)
             flash("Welcome", 'success')
+            log.info('You Are Logged In')
             return redirect(url_for('auth.dashboard'))
     return render_template('login.html', form=form)
 
