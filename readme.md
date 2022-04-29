@@ -1,4 +1,4 @@
-# Project Setup:
+# Project Setup
 
 Project Website: https://latestproject3.herokuapp.com/dashboard
 
