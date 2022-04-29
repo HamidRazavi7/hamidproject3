@@ -1,5 +1,5 @@
 
-# This test checks if the music csv file exists within the uploads folder:
+# This test checks if the music csv file exists within the upload folder:
 
 # def test_upload_csvfile(client):
 # file = "./uploads/music_copy.csv"
