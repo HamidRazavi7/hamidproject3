@@ -61,12 +61,14 @@ def login():
 @auth.route("/logout")
 @login_required
 def logout():
+    log = logging.getLogger('logout')
     """Logout the current user."""
     user = current_user
     user.authenticated = False
     db.session.add(user)
     db.session.commit()
     logout_user()
+    log.info('You Are Logged Out')
     return redirect(url_for('auth.login'))
 
 
