@@ -102,6 +102,34 @@ LOGGING_CONFIG = {
             'filename': 'app/logs/csvupload.log',
             'maxBytes': 10000000,
             'backupCount': 5,
+},
+        'file.handler.debug': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'standard',
+            'filename': 'app/logs/debug.log',
+            'maxBytes': 10000000,
+            'backupCount': 5,
+        },
+        'file.handler.logout': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'standard',
+            'filename': 'app/logs/logout.log',
+            'maxBytes': 10000000,
+            'backupCount': 5,
+        },
+        'file.handler.registration': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'standard',
+            'filename': 'app/logs/registration.log',
+            'maxBytes': 10000000,
+            'backupCount': 5,
+        },
+        'file.handler.login': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'standard',
+            'filename': 'app/logs/login.log',
+            'maxBytes': 10000000,
+            'backupCount': 5,
         },
     },
     'loggers': {
@@ -140,6 +168,27 @@ LOGGING_CONFIG = {
             'level': 'DEBUG',
             'propagate': False
         },
+        'logout': {  # if __name__ == '__main__'
+            'handlers': ['file.handler.logout'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'registration': {  # if __name__ == '__main__'
+            'handlers': ['file.handler.registration'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'login': {  # if __name__ == '__main__'
+            'handlers': ['file.handler.login'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'debug': {  # if __name__ == '__main__'
+            'handlers': ['file.handler.debug'],
+            'level': 'DEBUG',
+            'propagate': False
 
+        },
     }
 }
+
