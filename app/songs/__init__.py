@@ -32,9 +32,8 @@ def songs_browse(page):
 @login_required
 def songs_upload():
     form = csv_upload()
+    log = logging.getLogger("csvupload")
     if form.validate_on_submit():
-        log = logging.getLogger("myApp")
-
         filename = secure_filename(form.file.data.filename)
         filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
         form.file.data.save(filepath)
@@ -48,9 +47,11 @@ def songs_upload():
         current_user.songs = list_of_songs
         db.session.commit()
 
+        log.info('Music CSV Was Uploaded')
         return redirect(url_for('songs.songs_browse'))
 
     try:
+        print('within try')
         return render_template('upload.html', form=form)
     except TemplateNotFound:
         abort(404)
